@@ -14,7 +14,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
   func configure(with photo: Photo) {
     
     DispatchQueue.global().async {
-      guard let url = URL(string: photo.message ?? "" ) else { return }
+      guard let url = URL(string: photo.message) else { return }
       guard let imageData = try? Data(contentsOf: url) else { return }
       
       DispatchQueue.main.async {

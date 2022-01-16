@@ -16,6 +16,7 @@
 		4B2533432792247D00706473 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2533422792247D00706473 /* PhotoCollectionViewCell.swift */; };
 		4B253345279315A800706473 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B253344279315A800706473 /* Photo.swift */; };
 		4B253347279385A400706473 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B253346279385A400706473 /* NetworkingManager.swift */; };
+		4B2533492793956700706473 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2533482793956700706473 /* PhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4B2533422792247D00706473 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		4B253344279315A800706473 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		4B253346279385A400706473 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		4B2533482793956700706473 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +64,67 @@
 		4B25332B27921D9000706473 /* JSONApp */ = {
 			isa = PBXGroup;
 			children = (
-				4B25332C27921D9000706473 /* AppDelegate.swift */,
-				4B25332E27921D9000706473 /* SceneDelegate.swift */,
-				4B25333227921D9000706473 /* Main.storyboard */,
-				4B2533402792211E00706473 /* PhotosCollectionViewController.swift */,
-				4B253346279385A400706473 /* NetworkingManager.swift */,
-				4B253344279315A800706473 /* Photo.swift */,
-				4B2533422792247D00706473 /* PhotoCollectionViewCell.swift */,
-				4B25333527921D9100706473 /* Assets.xcassets */,
-				4B25333727921D9100706473 /* LaunchScreen.storyboard */,
-				4B25333A27921D9100706473 /* Info.plist */,
+				4B25334E2794645700706473 /* Storyboards */,
+				4B25334C2794640D00706473 /* ViewControllers */,
+				4B25334D2794644400706473 /* Models */,
+				4B25334A279463E200706473 /* Services */,
+				4B25334B279463F700706473 /* SupportFiles */,
+				4B25334F2794647000706473 /* Resources */,
 			);
 			path = JSONApp;
+			sourceTree = "<group>";
+		};
+		4B25334A279463E200706473 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4B253346279385A400706473 /* NetworkingManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		4B25334B279463F700706473 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				4B25332C27921D9000706473 /* AppDelegate.swift */,
+				4B25332E27921D9000706473 /* SceneDelegate.swift */,
+				4B25333A27921D9100706473 /* Info.plist */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		4B25334C2794640D00706473 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4B2533402792211E00706473 /* PhotosCollectionViewController.swift */,
+				4B2533422792247D00706473 /* PhotoCollectionViewCell.swift */,
+				4B2533482793956700706473 /* PhotoViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		4B25334D2794644400706473 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4B253344279315A800706473 /* Photo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4B25334E2794645700706473 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4B25333227921D9000706473 /* Main.storyboard */,
+				4B25333727921D9100706473 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4B25334F2794647000706473 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4B25333527921D9100706473 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +202,7 @@
 				4B2533432792247D00706473 /* PhotoCollectionViewCell.swift in Sources */,
 				4B25332F27921D9000706473 /* SceneDelegate.swift in Sources */,
 				4B253347279385A400706473 /* NetworkingManager.swift in Sources */,
+				4B2533492793956700706473 /* PhotoViewController.swift in Sources */,
 				4B2533412792211E00706473 /* PhotosCollectionViewController.swift in Sources */,
 				4B253345279315A800706473 /* Photo.swift in Sources */,
 			);
@@ -303,7 +355,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D3Z57ZF4U3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = JSONApp/Info.plist;
+				INFOPLIST_FILE = JSONApp/SupportFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -332,7 +384,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D3Z57ZF4U3;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = JSONApp/Info.plist;
+				INFOPLIST_FILE = JSONApp/SupportFiles/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

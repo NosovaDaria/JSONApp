@@ -9,32 +9,49 @@ import UIKit
 
 class PhotosCollectionViewController: UICollectionViewController {
   
+  // MARK: -  IB Outlets
   @IBOutlet var activityIndicator: UIActivityIndicatorView!
   
+  // MARK: - Public Properties
   let itemsPerRow: CGFloat = 2
-  let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-  private var photos: [Photo] = []
-  private let numberOfPhotos = 20
-
+  let sectionInserts = UIEdgeInsets(top: 20 , left: 20, bottom: 20, right: 20)
   
+  // MARK: - Private Properties
+  private let photosUrl = "https://dog.ceo/api/breeds/image/random"
+  private var photos: [Photo] = []
+  private let numberOfPhotos = 30
+
+  // MARK: - Override Methods
   override func viewDidLoad() {
     super.viewDidLoad()
     
     activityIndicator.startAnimating()
     activityIndicator.hidesWhenStopped = true
-    fetchPhoto()
+    
+    NetworkingManager.shared.fetchPhoto(photosUrl: photosUrl, numberOfPhotos: numberOfPhotos) { photo in
+      self.photos.append(photo)
+      self.collectionView.reloadData()
+    }
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "openPhotoSegue" {
+      let photoVC = segue.destination as! PhotoViewController
+      let cell = sender as! PhotoCollectionViewCell
+      photoVC.image = cell.photoImageView.image
+    }
   }
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
     2
   }
   
-  
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if photos.count == numberOfPhotos {
-      activityIndicator.stopAnimating()
+      
       return numberOfPhotos
     }
+    
     return 0
   }
   
@@ -44,50 +61,21 @@ class PhotosCollectionViewController: UICollectionViewController {
     if photos.count > indexPath.item {
       let photo = photos[indexPath.item]
       cell.configure(with: photo)
+      self.activityIndicator.stopAnimating()
     }
     
     return cell
   }
 }
-  
-//  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    <#code#>
-//  }
 
-  extension PhotosCollectionViewController {
-    func fetchPhoto() {
-      guard let url = URL(string: "https://dog.ceo/api/breeds/image/random") else { return }
-
-      for _ in 0..<numberOfPhotos {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-          guard let data = data, let response = response else {
-            print(error?.localizedDescription ?? "No error description")
-            return
-          }
-          print(response)
-          
-          do {
-            self.photos.append(try JSONDecoder().decode(Photo.self, from: data))
-            DispatchQueue.main.async {
-              self.collectionView.reloadData()
-            }
-          } catch {
-            print(error.localizedDescription)
-          }
-        }.resume()
-      }
-    }
-    
-    
-  }
-
-
+  // MARK: - Private Methods
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let paddingWith = sectionInserts.left * (itemsPerRow + 1)
-    let availableWidth = collectionView.frame.width - paddingWith
+    let paddingWidth = sectionInserts.left * (itemsPerRow + 1)
+    let availableWidth = collectionView.frame.width - paddingWidth
     let widthPerItem = availableWidth / itemsPerRow
+    
     return CGSize(width: widthPerItem, height: widthPerItem)
   }
   
