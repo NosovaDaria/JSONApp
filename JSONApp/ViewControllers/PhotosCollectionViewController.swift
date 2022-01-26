@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class PhotosCollectionViewController: UICollectionViewController {
   
@@ -19,7 +20,7 @@ class PhotosCollectionViewController: UICollectionViewController {
   // MARK: - Private Properties
   private let photosUrl = "https://dog.ceo/api/breeds/image/random"
   private var photos: [Photo] = []
-  private let numberOfPhotos = 30
+  private let numberOfPhotos = 21
 
   // MARK: - Override Methods
   override func viewDidLoad() {
@@ -28,9 +29,14 @@ class PhotosCollectionViewController: UICollectionViewController {
     activityIndicator.startAnimating()
     activityIndicator.hidesWhenStopped = true
     
-    NetworkingManager.shared.fetchPhoto(photosUrl: photosUrl, numberOfPhotos: numberOfPhotos) { photo in
-      self.photos.append(photo)
-      self.collectionView.reloadData()
+    NetworkingManager.shared.fetchPhotos(photosUrl, numberOfPhotos: numberOfPhotos) { result in
+      switch result {
+      case .success(let photo):
+        self.photos.append(photo)
+        self.collectionView.reloadData()
+      case .failure(let error):
+        print(error)
+      }
     }
   }
   
@@ -42,9 +48,9 @@ class PhotosCollectionViewController: UICollectionViewController {
     }
   }
   
-  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    2
-  }
+//  override func numberOfSections(in collectionView: UICollectionView) -> Int {
+//    1
+//  }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if photos.count == numberOfPhotos {
@@ -57,12 +63,12 @@ class PhotosCollectionViewController: UICollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
-    
-    if photos.count > indexPath.item {
+  
+//    if photos.count > indexPath.item {
       let photo = photos[indexPath.item]
       cell.configure(with: photo)
       self.activityIndicator.stopAnimating()
-    }
+//    }
     
     return cell
   }
