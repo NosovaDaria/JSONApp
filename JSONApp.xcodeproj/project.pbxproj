@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		093DABCEF7F8B654A2993F3D /* Pods_JSONApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5988C40D5BAB6E5AEBB1B74B /* Pods_JSONApp.framework */; };
+		4B18E19427A22B4900CF3F8C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B18E19327A22B4900CF3F8C /* ImageCache.swift */; };
 		4B25332D27921D9000706473 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B25332C27921D9000706473 /* AppDelegate.swift */; };
 		4B25332F27921D9000706473 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B25332E27921D9000706473 /* SceneDelegate.swift */; };
 		4B25333427921D9000706473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B25333227921D9000706473 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B18E19327A22B4900CF3F8C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		4B25332927921D9000706473 /* JSONApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSONApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B25332C27921D9000706473 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4B25332E27921D9000706473 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				4B253346279385A400706473 /* NetworkingManager.swift */,
+				4B18E19327A22B4900CF3F8C /* ImageCache.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -148,7 +151,6 @@
 				594A91B5B474AFC6D58B7693 /* Pods-JSONApp.debug.xcconfig */,
 				731E74AE2BA126CDB1C71800 /* Pods-JSONApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -269,6 +271,7 @@
 			files = (
 				4B25332D27921D9000706473 /* AppDelegate.swift in Sources */,
 				4B2533432792247D00706473 /* PhotoCollectionViewCell.swift in Sources */,
+				4B18E19427A22B4900CF3F8C /* ImageCache.swift in Sources */,
 				4B25332F27921D9000706473 /* SceneDelegate.swift in Sources */,
 				4B253347279385A400706473 /* NetworkingManager.swift in Sources */,
 				4B2533492793956700706473 /* PhotoViewController.swift in Sources */,

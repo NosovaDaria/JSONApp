@@ -50,4 +50,16 @@ class NetworkingManager {
       }
     }
   }
+  func fetchImage(from url: URL, completion: @escaping(Result<Data, Error>) -> Void) {
+    URLSession.shared.dataTask(with: url) { data, _, error in
+      
+      guard let data = data else {
+        print(error?.localizedDescription ?? "No error description")
+        return
+      }
+      DispatchQueue.main.async {
+        completion(.success(data))
+      }
+    }.resume()
+  }
 }

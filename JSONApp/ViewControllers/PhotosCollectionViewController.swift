@@ -14,13 +14,15 @@ class PhotosCollectionViewController: UICollectionViewController {
   @IBOutlet var activityIndicator: UIActivityIndicatorView!
   
   // MARK: - Public Properties
+  let refreshControl = UIRefreshControl()
   let itemsPerRow: CGFloat = 2
   let sectionInserts = UIEdgeInsets(top: 20 , left: 20, bottom: 20, right: 20)
   
   // MARK: - Private Properties
   private let photosUrl = "https://dog.ceo/api/breeds/image/random"
   private var photos: [Photo] = []
-  private let numberOfPhotos = 21
+  private let numberOfPhotos = 40
+
 
   // MARK: - Override Methods
   override func viewDidLoad() {
@@ -28,16 +30,19 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     activityIndicator.startAnimating()
     activityIndicator.hidesWhenStopped = true
+    downloadData()
+    setupRefreshControl()
     
-    NetworkingManager.shared.fetchPhotos(photosUrl, numberOfPhotos: numberOfPhotos) { result in
-      switch result {
-      case .success(let photo):
-        self.photos.append(photo)
-        self.collectionView.reloadData()
-      case .failure(let error):
-        print(error)
-      }
-    }
+    
+//    NetworkingManager.shared.fetchPhotos(photosUrl, numberOfPhotos: numberOfPhotos) { result in
+//      switch result {
+//      case .success(let photo):
+//        self.photos.append(photo)
+//        self.collectionView.reloadData()
+//      case .failure(let error):
+//        print(error)
+//      }
+//    }
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -64,13 +69,31 @@ class PhotosCollectionViewController: UICollectionViewController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
   
-//    if photos.count > indexPath.item {
       let photo = photos[indexPath.item]
       cell.configure(with: photo)
       self.activityIndicator.stopAnimating()
-//    }
     
     return cell
+  }
+}
+extension PhotosCollectionViewController {
+  @objc private func downloadData() {
+    NetworkingManager.shared.fetchPhotos(photosUrl, numberOfPhotos: numberOfPhotos) { result in
+      switch result {
+      case .success(let photo):
+        self.photos.append(photo)
+        self.collectionView.reloadData()
+        self.refreshControl.endRefreshing()
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
+  
+  private func setupRefreshControl() {
+    collectionView.refreshControl = refreshControl
+    refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+    refreshControl.addTarget(self, action: #selector(downloadData), for: .valueChanged)
   }
 }
 
